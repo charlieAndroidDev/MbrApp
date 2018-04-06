@@ -14,9 +14,12 @@ var server = http.createServer(function(request, response) {
 
         request.on('end', function () {
             var post = qs.parse(body);
+
+            var uniqueId = post['unique_id'];
+            var payloadSize = post['payload_size'];
             
             response.writeHead(200, {"Content-Type": "text/plain"});
-            response.end(post['message']);
+            response.end(uniqueId + payloadSize);
         });
     } else {
         
