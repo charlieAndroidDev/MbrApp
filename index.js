@@ -4,6 +4,8 @@ var crypto = require("crypto");
 
 var server = http.createServer(function(request, response) {
 
+    var start = Date.now();
+
     if (request.method == 'POST') {
         var body = '';
 
@@ -26,8 +28,9 @@ var server = http.createServer(function(request, response) {
 
             var obj = new Object();
             obj.requestId = uniqueId;
-            obj.timestamp = Date.now();
+            obj.timestamp = start;
             obj.payload = randomData;
+            obj.delay = Date.now() - start;
             var jsonString= JSON.stringify(obj);
             
             response.writeHead(200, {"Content-Type": "application/json"});
