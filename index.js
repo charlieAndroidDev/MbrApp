@@ -26,7 +26,7 @@ var server = http.createServer(function(request, response) {
 
             var obj = new Object();
             obj.requestId = uniqueId;
-            obj.timestamp  = Date.now;
+            obj.timestamp = Date.now;
             obj.payload = randomData;
             var jsonString= JSON.stringify(obj);
             
