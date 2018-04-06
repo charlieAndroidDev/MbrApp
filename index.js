@@ -22,6 +22,7 @@ var server = http.createServer(function(request, response) {
 
             // Hex string assigns 2 chars to each byte
             var randomData = crypto.randomBytes(payloadSize * 500).toString('hex');
+            console.log("Data: %s", randomData);
 
             var obj = new Object();
             obj.requestId = uniqueId;
