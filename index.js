@@ -1,10 +1,12 @@
 var http = require('http');
 var qs = require('querystring');
+var crypto = require("crypto");
 
 var server = http.createServer(function(request, response) {
 
     if (request.method == 'POST') {
         var body = '';
+
 
         request.on('data', function (data) {
             body += data;
@@ -17,9 +19,18 @@ var server = http.createServer(function(request, response) {
 
             var uniqueId = post['unique_id'];
             var payloadSize = post['payload_size'];
+
+            // Hex string assigns 2 chars to each byte
+            var randomData = crypto.randomBytes(payloadSize * 500).toString('hex');
+
+            var obj = new Object();
+            obj.requestId = uniqueId;
+            obj.timestamp  = Date.now;
+            obj.payload = randomData;
+            var jsonString= JSON.stringify(obj);
             
-            response.writeHead(200, {"Content-Type": "text/plain"});
-            response.end(uniqueId + payloadSize);
+            response.writeHead(200, {"Content-Type": "application/json"});
+            response.end(obj);
         });
     } else {
         
