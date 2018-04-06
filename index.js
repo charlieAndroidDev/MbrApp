@@ -31,7 +31,7 @@ var server = http.createServer(function(request, response) {
             var jsonString= JSON.stringify(obj);
             
             response.writeHead(200, {"Content-Type": "application/json"});
-            response.end(obj);
+            response.end(jsonString);
         });
     } else {
         
