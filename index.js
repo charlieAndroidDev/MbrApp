@@ -1,9 +1,31 @@
 var http = require('http');
+var qs = require('querystring');
 
 var server = http.createServer(function(request, response) {
 
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Hello World!");
+    if (request.method == 'POST') {
+        var body = '';
+
+        request.on('data', function (data) {
+            body += data;
+            if (body.length > 1e6)
+                request.connection.destroy();
+        });
+
+        request.on('end', function () {
+            var post = qs.parse(body);
+            
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.end(post['message']);
+        });
+    } else {
+        
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.end("Hello World!");
+
+    }
+
+    
 
 });
 
