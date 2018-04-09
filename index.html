@@ -45,7 +45,7 @@
                 var second = new XMLHttpRequest();
                 var checkEmp = "https://prod-21.canadaeast.logic.azure.com:443/workflows/9d4454421e9e4d16a92cdd435332206d/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3RunXFfxzcuJ2lEhY1Ix3bnfGkx3vl0UmIrAecnXaLc";
 
-                var params = "mortId=" + strippedId;
+                var secondParams = "mortId=" + strippedId;
 
                 second.open("POST", checkEmp, true);
         
@@ -65,6 +65,7 @@
                     }
 
                 }
+                second.send(secondParams);
             }
         }
         http.send(params);
