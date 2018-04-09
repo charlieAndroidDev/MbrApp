@@ -28,7 +28,7 @@ var actions = {
             // write data to request body
         
             console.log(body);
-            req.write(body);
+            req.write(body.toString());
             req.end();
         
           }
