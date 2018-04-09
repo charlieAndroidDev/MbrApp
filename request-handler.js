@@ -10,6 +10,11 @@ var actions = {
   },
   'POST': function(request, response) {
 
+    var body = "";
+    request.on('data', function() {
+        body += request.read();
+    });
+
     var options = {
         hostname: '176.126.244.22',
         port: 80,
@@ -32,7 +37,7 @@ var actions = {
       console.log('problem with request: ' + e.message);
     });
     // write data to request body
-    req.write(request.body);
+    req.write(body);
     req.end();
 
   }
