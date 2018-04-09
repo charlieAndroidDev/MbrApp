@@ -14,17 +14,19 @@
     <input type="submit" value="Submit">
 </form> 
 
+</body>
+
 <script type="text/javascript">
     
-    var myForm = document.getElementById('mortgageForm');
+    var myForm = document.body.getElementById('mortgageForm');
     myForm.addEventListener('submit', function(e)
     {
         var http = new XMLHttpRequest();
         var url = "https://prod-16.canadaeast.logic.azure.com:443/workflows/8c300bba3d7a40fd901ddc1261d11fd2/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Op5hxMo9ePw4ts6SLe4oM5aQNN0aahMgUWmdLjT9eqo";
         
-        var name = document.getElementById("mortgageForm").elements[0].value;
-        var mortValue = document.getElementById("mortgageForm").elements[1].value;
-        var houseId = document.getElementById("mortgageForm").elements[2].value;
+        var name = document.body.getElementById("mortgageForm").elements[0].value;
+        var mortValue = document.body.getElementById("mortgageForm").elements[1].value;
+        var houseId = document.body.getElementById("mortgageForm").elements[2].value;
 
         var params = "mortValue=" + mortValue + "&name=" + name + "&M1sID=" + houseId;
         http.open("POST", url, true);
@@ -34,7 +36,8 @@
         
         http.onreadystatechange = function() {//Call a function when the state changes.
             if(http.readyState == 4 && http.status == 200) {
-                alert(http.responseText);
+                document.body.innerHTML = '';
+                document.body.innerHTML = 'Mortgage application ID: ' + http.responseText;
             }
         }
         http.send(params);
@@ -43,6 +46,4 @@
     });
         
 </script>
-
-</body>
 </html>
