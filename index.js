@@ -16,21 +16,25 @@ var server = http.createServer(function(request, response) {
 
     var body = '';
     
-    request.on('readable', function (data) {
+    request.on('data', function (data) {
         body += data;
     });
 
-    console.log("BODY: " + body);
+    request.on('end', function() {
 
-    var urlParts = url.parse(request.url);
-    var route = routes[urlParts.pathname];
+        console.log("BODY: " + body);
+        
+        var urlParts = url.parse(request.url);
+        var route = routes[urlParts.pathname];
+        
+        if(route && request.method == "POST") {
+            route(request, response, body);
+        }
+          
+        if (route) route(request, response);
+        else utilities.sendResponse(response, 'Not Found', 404);
 
-    if(route && request.method == "POST") {
-        route(request, response, body);
-    }
-  
-    if (route) route(request, response);
-    else utilities.sendResponse(response, 'Not Found', 404);
+    });
     
 });
     
