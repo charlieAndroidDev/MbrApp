@@ -4,7 +4,8 @@ var handleRequest = require('./request-handler.js');
 var utilities = require('./utilities.js');
 
 var routes = {
-    '/apply': handleRequest
+    '/apply': handleRequest,
+    '/submitEmployment': handleRequest
 };
 
 var server = http.createServer(function(request, response) {
