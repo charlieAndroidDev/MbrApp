@@ -11,8 +11,8 @@ var actions = {
   'POST': function(request, response) {
 
     var body = "";
-    request.on('data', function() {
-        body += request.read();
+    request.on('data', function(data) {
+        body = data.toString();
     });
 
     var options = {
