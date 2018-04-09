@@ -28,7 +28,7 @@ var actions = {
             // write data to request body
         
             console.log(body);
-            //req.write(body.toString());
+            req.writeHead(200, {"Content-Type": "text/html"});
             req.end(body);
         
           }
