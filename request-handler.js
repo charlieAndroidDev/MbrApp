@@ -1,5 +1,6 @@
 var utilities = require('./utilities.js');
 var fs = require("fs");
+var http = require('http');
 
 var actions = {
   'GET': function(request, response) {
