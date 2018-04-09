@@ -37,6 +37,8 @@ var actions = {
       console.log('problem with request: ' + e.message);
     });
     // write data to request body
+
+    console.log(body);
     req.write(body);
     req.end();
 
