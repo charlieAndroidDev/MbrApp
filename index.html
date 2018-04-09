@@ -34,12 +34,41 @@
         
         http.onreadystatechange = function() {//Call a function when the state changes.
             if(http.readyState == 4 && http.status == 200) {
+
+                var mortId = http.responseText;
+
                 document.body.innerHTML = '';
-                document.body.innerHTML = http.responseText;
+                document.body.innerHTML = mortId;
+
+                var second = new XMLHttpRequest();
+                var checkEmp = "https://prod-21.canadaeast.logic.azure.com:443/workflows/9d4454421e9e4d16a92cdd435332206d/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3RunXFfxzcuJ2lEhY1Ix3bnfGkx3vl0UmIrAecnXaLc";
+
+                var params = "mortId=" + mortId;
+
+                second.open("POST", checkEmp, true);
+        
+                //Send the proper header information along with the request
+                second.setRequestHeader("Content-type", "text/plain");
+
+                second.onreadystatechange = function() {//Call a function when the state changes.
+
+                    if(second.readyState == 4 && second.status == 200) {
+
+                        if(second.responseText.includes("No")) {
+                            document.body.innerHTML += "\n\n <font color='red'>You have not yet provided us access to your employment details.</font>";
+                        } else {
+                            document.body.innerHTML += "\n\n <font color='green'>Employment details successfully submitted</font>";
+                        }
+
+                    }
+
+                }
             }
         }
         http.send(params);
     
+        
+
         e.preventDefault();
     });
         
