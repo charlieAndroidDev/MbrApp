@@ -14,7 +14,7 @@ var server = http.createServer(function(request, response) {
     //response.end(html);
 
     var urlParts = url.parse(request.url);
-    var route = routes[parts.pathname];
+    var route = routes[urlParts.pathname];
   
     if (route) route(request, response);
     else utilities.sendResponse(response, 'Not Found', 404);
