@@ -69,6 +69,8 @@
 
                         appraisal.open("POST", checkAppraisal, true);
 
+                        appraisal.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
                         appraisal.onreadystatechange = function() {//Call a function when the state changes.
 
                             if(appraisal.readyState == 4 && appraisal.status == 200) {
