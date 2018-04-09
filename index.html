@@ -47,6 +47,8 @@
 
                 var secondParams = "mortId=" + strippedId;
 
+                document.body.innerHTML += "<br><br>" + strippedId;
+
                 second.open("POST", checkEmp, true);
         
                 //Send the proper header information along with the request
@@ -56,10 +58,10 @@
 
                     if(second.readyState == 4 && second.status == 200) {
 
-                        if(second.responseText.includes("No")) {
-                            document.body.innerHTML += "\n\n <font color='red'>You have not yet provided us access to your employment details.</font>";
+                        if(second.responseText.includes("Yes")) {
+                            document.body.innerHTML += "<br><br> <font color='green'>Employment details successfully submitted</font>";
                         } else {
-                            document.body.innerHTML += "\n\n <font color='green'>Employment details successfully submitted</font>";
+                            document.body.innerHTML += "<br><br> <font color='red'>You have not yet provided us access to your employment details.</font>";
                         }
 
                     }
