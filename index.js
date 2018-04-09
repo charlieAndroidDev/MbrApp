@@ -1,11 +1,12 @@
 var http = require('http');
 var url = require('url');
 var handleRequest = require('./request-handler.js');
+var handlePostRequest = require('./post-request-hadler.js');
 var utilities = require('./utilities.js');
 
 var routes = {
     '/apply': handleRequest,
-    '/submitEmployment': handleRequest
+    '/submitEmployment': handlePostRequest
 };
 
 var server = http.createServer(function(request, response) {
@@ -15,6 +16,21 @@ var server = http.createServer(function(request, response) {
 
     var urlParts = url.parse(request.url);
     var route = routes[urlParts.pathname];
+
+    if(route && request.method == "POST") {
+        var body = '';
+        
+        request.on('data', function (data) {
+            body += data;
+    
+            // Too much POST data, kill the connection!
+            // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
+            if (body.length > 1e6)
+                request.connection.destroy();
+        });
+
+        route(request, response, body);
+    }
   
     if (route) route(request, response);
     else utilities.sendResponse(response, 'Not Found', 404);
