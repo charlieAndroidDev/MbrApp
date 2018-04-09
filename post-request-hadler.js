@@ -36,6 +36,6 @@ var actions = {
 
 module.exports = function(request, response, body) {
   var action = actions[request.method];
-  if (action) action(request, response);
+  if (action) action(request, response, body);
   else utilities.sendResponse(response, 'Not Found', 404);
 };
