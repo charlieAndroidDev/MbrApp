@@ -29,6 +29,8 @@ var server = http.createServer(function(request, response) {
                 request.connection.destroy();
         });
 
+        console.log("BODY: " + body);
+
         route(request, response, body);
     }
   
