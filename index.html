@@ -40,10 +40,12 @@
                 document.body.innerHTML = '';
                 document.body.innerHTML = mortId;
 
+                var strippedId = mortId.substr(mortId.indexOf(':') + 2, mortId.length);
+
                 var second = new XMLHttpRequest();
                 var checkEmp = "https://prod-21.canadaeast.logic.azure.com:443/workflows/9d4454421e9e4d16a92cdd435332206d/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3RunXFfxzcuJ2lEhY1Ix3bnfGkx3vl0UmIrAecnXaLc";
 
-                var params = "mortId=" + mortId;
+                var params = "mortId=" + strippedId;
 
                 second.open("POST", checkEmp, true);
         
