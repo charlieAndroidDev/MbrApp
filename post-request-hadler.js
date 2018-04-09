@@ -21,7 +21,8 @@ var actions = {
                 res.on('data', function (body) {
                   console.log('Body: ' + body);
                 });
-                res.writeHead(200, {"Content-Type": "text/html"});
+                response.writeHead(200, {"Content-Type": "text/html"});
+                response.end();
               });
             req.on('error', function(e) {
               console.log('problem with request: ' + e.message);
