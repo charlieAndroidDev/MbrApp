@@ -16,7 +16,7 @@ var server = http.createServer(function(request, response) {
 
     var body = '';
     
-    request.on('data', function (data) {
+    request.on('readable', function (data) {
         body += data;
     });
 
