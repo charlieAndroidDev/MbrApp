@@ -1,5 +1,4 @@
 var http = require('http');
-var fs = require("fs");
 var url = require('url');
 var handleRequest = require('./request-handler.js');
 var utilities = require('./utilities.js');
