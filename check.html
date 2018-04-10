@@ -54,7 +54,7 @@ var myForm = document.getElementById('checkForm');
 
                                 if(second.responseText.includes("Yes")) {
                                     document.body.innerHTML += "<br><br> <font color='green'>Appraisal received successfully</font>";
-                                } else {
+                                } else if(second.responseText.includes("No")) {
                                     document.body.innerHTML += "<br><br> <font color='red'>You have not yet applied for an appraisal on the property</font>";
                                 }
 
