@@ -3,10 +3,12 @@ var url = require('url');
 var handleRequest = require('./request-handler.js');
 var handlePostRequest = require('./post-request-hadler.js');
 var handleRealRequest = require('./real-request-handler.js');
+var handleCheckRequest = require('./check-request-handler.js');
 var utilities = require('./utilities.js');
 
 var routes = {
     '/apply': handleRequest,
+    '/check': handleCheckRequest,
     '/submitEmployment': handlePostRequest,
     '/submitRealEstate': handleRealRequest
 };
