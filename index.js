@@ -2,11 +2,13 @@ var http = require('http');
 var url = require('url');
 var handleRequest = require('./request-handler.js');
 var handlePostRequest = require('./post-request-hadler.js');
+var handleRealRequest = require('./real-request-handler.js');
 var utilities = require('./utilities.js');
 
 var routes = {
     '/apply': handleRequest,
-    '/submitEmployment': handlePostRequest
+    '/submitEmployment': handlePostRequest,
+    '/submitRealEstate': handleRealRequest
 };
 
 var server = http.createServer(function(request, response) {
